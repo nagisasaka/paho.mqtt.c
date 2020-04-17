@@ -113,83 +113,153 @@
 #endif
 
 /**
+ * \~english
  * Return code: No error. Indicates successful completion of an MQTT client
  * operation.
+ * \~japanese
+ * エラーが無いこと、つまり MQTT クライアントの操作が成功したことを示す返り値です。
+ * \~
  */
 #define MQTTASYNC_SUCCESS 0
 /**
+ * \~english
  * Return code: A generic error code indicating the failure of an MQTT client
  * operation.
+ * \~japanese
+ * 一般エラーが発生したことを示す返り値です。
+ * \~
  */
 #define MQTTASYNC_FAILURE -1
 
-/* error code -2 is MQTTAsync_PERSISTENCE_ERROR */
-
+/**
+ * \~english
+ * error code -2 is MQTTAsync_PERSISTENCE_ERROR
+ * \~japanese
+ * 永続化方式に関するエラーが発生したことを示す返り値です。
+ * \~
+ */
 #define MQTTASYNC_PERSISTENCE_ERROR -2
 
 /**
+ * \~english
  * Return code: The client is disconnected.
+ * \~japanese
+ * クライアントが切断されたことを示す返り値です。
+ * \~
  */
 #define MQTTASYNC_DISCONNECTED -3
 /**
+ * \~english
  * Return code: The maximum number of messages allowed to be simultaneously
  * in-flight has been reached.
+ * \~japanese
+ * 同時に転送可能な最大メッセージ数に達したことを示す返り値です。
+ * \~
  */
 #define MQTTASYNC_MAX_MESSAGES_INFLIGHT -4
 /**
+ * \~english
  * Return code: An invalid UTF-8 string has been detected.
+ * \~japanese
+ * 不正な UTF-8 文字列が検出されたことを示す返り値です。
+ * \~
  */
 #define MQTTASYNC_BAD_UTF8_STRING -5
 /**
+ * \~english
  * Return code: A NULL parameter has been supplied when this is invalid.
+ * \~japanese
+ * 不正な NULL パラメータが渡されたことを示す返り値です。
+ * \~
  */
 #define MQTTASYNC_NULL_PARAMETER -6
 /**
+ * \~english
  * Return code: The topic has been truncated (the topic string includes
  * embedded NULL characters). String functions will not access the full topic.
  * Use the topic length value to access the full topic.
+ * \~japanese
+ * トピック文字列の途中に NULL 文字があることなどによって、トピック文字列が途中で切り落とされてしまったことを示す返り値です。
+ * String 関数が、トピック文字列全長を取り扱えません。topic 長を指定することで、全長を取り使えるようにしてください。
+ * \~
  */
 #define MQTTASYNC_TOPICNAME_TRUNCATED -7
 /**
+ * \~english 
  * Return code: A structure parameter does not have the correct eyecatcher
  * and version number.
+ * \~japanese
+ * 構造体のアイキャッチャーとバージョン番号が不正であることを示す返り値です。
+ * \~
  */
 #define MQTTASYNC_BAD_STRUCTURE -8
 /**
+ * \~english
  * Return code: A qos parameter is not 0, 1 or 2
+ * \~japanese
+ * QoS パラメータが 0, 1, 2 になっていません。
+ * \~
  */
 #define MQTTASYNC_BAD_QOS -9
 /**
+ * \~english
  * Return code: All 65535 MQTT msgids are being used
+ * \~japanese
+ * 65535 個の全部のメッセージIDが使われてしまったことを示す返り値です。
+ * \~
  */
 #define MQTTASYNC_NO_MORE_MSGIDS -10
 /**
+ * \~english
  * Return code: the request is being discarded when not complete
+ * \~japanese
+ * 要求が完了するまえに捨てられてしまったことを示す返り値です。
+ * \~
  */
 #define MQTTASYNC_OPERATION_INCOMPLETE -11
 /**
+ * \~english
  * Return code: no more messages can be buffered
+ * \~japanese
+ * これ以上メッセージをクライアント内部にバッファリングすることができないことを示す返り値です。
+ * \~
  */
 #define MQTTASYNC_MAX_BUFFERED_MESSAGES -12
 /**
+ * \~english
  * Return code: Attempting SSL connection using non-SSL version of library
+ * \~japanese
+ * 非 SSL バージョンのライブラリを使って SSL 接続をしようとしたことを示す返り値です。
+ * \~
  */
 #define MQTTASYNC_SSL_NOT_SUPPORTED -13
  /**
+ * \~english
   * Return code: protocol prefix in serverURI should be tcp://, ssl://, ws:// or wss://
   * The TLS enabled prefixes (ssl, wss) are only valid if the TLS version of the library
   * is linked with.
+ * \~japanese
+ * プロトコルが不正であることを示す返り値です。serverURI のプレフィックスは tcp://, ssl:// ws:// もしくは wss:// でなければなりません。
+ * ssl と wss は TLS バージョンのライブラリを使ったときしか有効じゃないよー
+ * \~
   */
 #define MQTTASYNC_BAD_PROTOCOL -14
  /**
+ * \~english
   * Return code: don't use options for another version of MQTT
+ * \~japanese
+ * 違う MQTT バージョンのオプションを使おうとしてることを示す返り値です。
+ * \~
   */
  #define MQTTASYNC_BAD_MQTT_OPTION -15
  /**
+ * \~english
   * Return code: call not applicable to the client's version of MQTT
-  */
+ * \~japanese
+ * 利用できない MQTT バージョンが指定されたことを示す返り値です。
+ * \~
+*/
  #define MQTTASYNC_WRONG_MQTT_VERSION -16
-
 
 /**
  * Default MQTT version to connect with.  Use 3.1.1 then fall back to 3.1
@@ -211,7 +281,6 @@
  * Bad return code from subscribe, as defined in the 3.1.1 specification
  */
 #define MQTT_BAD_SUBSCRIBE 0x80
-
 
 /**
  *  Initialization options
@@ -282,6 +351,7 @@ typedef struct
      */
 	int qos;
 	/**
+     * ~\english
      * The retained flag serves two purposes depending on whether the message
      * it is associated with is being published or received.
      *
@@ -298,13 +368,27 @@ typedef struct
      * by the MQTT server. For subscribers, a false setting indicates this is
      * a normal message, received as a result of it being published to the
      * server.
+     * \~japanese
+     * リテイン機能は、メッセージを送信する場合と受信する場合とで、２つの異なる役割があります。
+     * retained = true
+     * メッセージの送信側では、MQTT サーバーは、まずメッセージのコピーを保持します。その上で、新しいサブスクライバーにメッセージを送信します。
+     * メッセージの受信側では、そのメッセージが新しいメッセージではない、つまり MQTT サーバーが「保持（リテイン）」したメッセージであることを示します。
+     * retained = false
+     * メッセージの送信側では、メッセージがサーバーで保持されないということを示します。
+     * メッセージの受信側では、普通に、パブリッシュされたメッセージを受信するということを示します。
+     * \~
      */
 	int retained;
 	/**
-      * The dup flag indicates whether or not this message is a duplicate.
+  * \~english
+  * The dup flag indicates whether or not this message is a duplicate.
       * It is only meaningful when receiving QoS1 messages. When true, the
       * client application should take appropriate action to deal with the
       * duplicate message.
+      * \~japanese
+      * dup フラグは、メッセージが複製されるかどうかを指定します。
+      * これは QoS1 メッセージのときのみ意味を持ちます。true のとき、クライアントアプリケーションは、重複メッセージを適切に取り扱う必要があります。
+      * \~
       */
 	int dup;
 	/** The message identifier is normally reserved for internal use by the
@@ -805,6 +889,37 @@ DLLExport int MQTTAsync_reconnect(MQTTAsync handle);
 
 
 /**
+ * \~japanese
+ * @brief 
+ * この関数は指定されたサーバーに、指定された永続ストレージを使って接続することができる MQTT クライアントを作成します
+ * @param handle 
+ * MQTTAsync ハンドルへのポインタです。この関数が成功した場合、有効なポインタが返されます。
+ * @param serverURI 
+ * NULL 終端された接続先サーバーを表す文字列です。<i>protocol://host:port</i> という形式で、プロトコルは tcp もしくは ssl です。ホストには
+ * IP アドレスまたはホスト名を指定できます。例えば、ローカルホストで動作しているデフォルトの MQTT サーバーのときは、<i>tcp://localhost:1883</i>
+ * と指定します。
+ * @param clientId
+ * サーバーと接続したときサーバーに与えられるクライアント識別子です。NULL 終端された UTF-8 文字列になります。
+ * @param persistence_type 
+ * クライアントで使われる永続化方式を指定します。
+ * <br>
+ * ::MQTTCLIENT_PERSISTENCE_NONE: インメモリーの永続化方式です。クライアントが動作しているデバイスまたはシステムが、電源オフなど停止した場合には、
+ * 転送中のメッセージの状態は破棄され、QoS1,2 が指定されている場合であっても、いくつかのメッセージは届かなくなる可能性があります。
+ * <br>
+ * ::MQTTCLIENT_PERSISTENCE_DEFAULT: 
+ * デフォルトのファイルシステムを使った永続化方式を使います。転送中のメッセージの状態は、永続ストレージに保持され、想定外の問題が発生しても、メッセージが失われないように保護されます。
+ * 
+ * <br>
+ * ::MQTTCLIENT_PERSISTENCE_USER: 
+ * アプリケーションに応じた永続化方式を使います。このタイプは、どのように永続化するかをアプリケーションに任せるので、アプリケーションは MQTTClient_persistence インターフェースを実装
+ * しなければなりません。
+ * 
+ * @param persistence_context
+ * ::MQTTCLIENT_PERSISTENCE_NONE を指定したとき、この引数は使わないので NULL を指定してください。::MQTTCLIENT_PERSISTENCE_DEFAULT を指定したとき、ファイルシステム上のディレクトリを指定してください。
+ * もし NULL が指定されたときは、作業ディレクトリが利用されます。::MQTTCLIENT_PERSISTENCE_USER を指定したとき、有効な MQTTClient_persistence 構造体へのポインタを指定してください。
+ * @return ::MQTTASYNC_SUCCESS if the client is successfully created, otherwise an error code is returned.
+ * \~english
+ * @brief 
  * This function creates an MQTT client ready for connection to the
  * specified server and using the specified persistent storage (see
  * MQTTAsync_persistence). See also MQTTAsync_destroy().
@@ -844,6 +959,7 @@ DLLExport int MQTTAsync_reconnect(MQTTAsync handle);
  * argument to point to a valid MQTTClient_persistence structure.
  * @return ::MQTTASYNC_SUCCESS if the client is successfully created, otherwise
  * an error code is returned.
+ * \~
  */
 DLLExport int MQTTAsync_create(MQTTAsync* handle, const char* serverURI, const char* clientId,
 		int persistence_type, void* persistence_context);
@@ -856,15 +972,34 @@ typedef struct
 	 * 0 means no MQTTVersion
 	 */
 	int struct_version;
-	/** Whether to allow messages to be sent when the client library is not connected. */
+	/** 
+   * \~japanese
+   * クライアントライブラリがサーバーに接続されていないときにメッセージを送信するすることを許可するかどうか
+   * \~english 
+   * Whether to allow messages to be sent when the client library is not connected. 
+   * \~
+  */
 	int sendWhileDisconnected;
-	/** the maximum number of messages allowed to be buffered while not connected. */
+	/**
+	 * \~japanese
+   * サーバーに接続されていないときにバッファするメッセージの最大個数
+	 * \~english
+	 * maximum number of messages allowed to be buffered while not connected. 
+   * \~
+   */
 	int maxBufferedMessages;
-	/** Whether the MQTT version is 3.1, 3.1.1, or 5.  To use V5, this must be set.
+  /**
+   * \~japanese 
+   *  MQTT v5 を使う場合、ここで設定しなくてはなりません。永続化方式を指定して MQTTAsync ハンドルを生成する場合、永続化されるデータのフォーマットを
+   * 事前に知っておく必要があります。v3 や v3.1.1 を指定して v5 の永続化されたメッセージを読みに行った場合、エラーになり MQTTAsync ハンドラが生成できません。
+   * \~english
+	 *  Whether the MQTT version is 3.1, 3.1.1, or 5.  To use V5, this must be set.
 	 *  MQTT V5 has to be chosen here, because during the create call the message persistence
 	 *  is initialized, and we want to know whether the format of any persisted messages
 	 *  is appropriate for the MQTT version we are going to connect with.  Selecting 3.1 or
-	 *  3.1.1 and attempting to read 5.0 persisted messages will result in an error on create.  */
+	 *  3.1.1 and attempting to read 5.0 persisted messages will result in an error on create.  
+   * \~
+   * */
 	int MQTTVersion;
 } MQTTAsync_createOptions;
 
@@ -877,6 +1012,8 @@ DLLExport int MQTTAsync_createWithOptions(MQTTAsync* handle, const char* serverU
 		int persistence_type, void* persistence_context, MQTTAsync_createOptions* options);
 
 /**
+ * 
+ * \~english
  * MQTTAsync_willOptions defines the MQTT "Last Will and Testament" (LWT) settings for
  * the client. In the event that a client unexpectedly loses its connection to
  * the server, the server publishes the LWT message to the LWT topic on
@@ -887,6 +1024,11 @@ DLLExport int MQTTAsync_createWithOptions(MQTTAsync* handle, const char* serverU
  * MQTTAsync_connect() call that connects the client to the server. The pointer
  * to MQTTAsync_willOptions can be set to NULL if the LWT function is not
  * required.
+ * \~japanese
+ * MQTTAsync_willOptions は、クライアントに対して、MQTT の「遺言（LWT）」メッセージの設定を行います。サーバーへの接続が突然切れてしまったとき、クライアントに代わって、サーバーが LWT トピックに LWT メッセージをパブリッシュします。
+ * これによって、LWT トピックをサブスクライブしている他のクライアントに対して、自分のサーバーへの接続が切れてしまったことを伝えることができます。LWT 機能を有効にするためには、有効な MQTTAsync_willOptions 構造体へのポインタを
+ * MQTTAsync_connectOptions 構造体にセットしてください。LWT 機能を使わないときは、NULL を指定してください。
+ * \~
  */
 typedef struct
 {
@@ -901,18 +1043,22 @@ typedef struct
 	/** The LWT payload. */
 	const char* message;
 	/**
-      * The retained flag for the LWT message (see MQTTAsync_message.retained).
-      */
+	 * \~english 
+	 * The retained flag for the LWT message (see MQTTAsync_message.retained).
+   * \~japanese
+   * LWT メッセージをリテインさせるかどうかを指定します。MQTTAsync_message.retained も見てね。
+   * \~
+   */
 	int retained;
 	/**
-      * The quality of service setting for the LWT message (see
-      * MQTTAsync_message.qos and @ref qos).
-      */
+   * The quality of service setting for the LWT message (see
+   * MQTTAsync_message.qos and @ref qos).
+   */
 	int qos;
 	/** The LWT payload in binary form. This is only checked and used if the message option is NULL */
 	struct
 	{
-  	int len;            /**< binary payload length */
+  	int len;           /**< binary payload length */
 		const void* data;  /**< binary payload data */
 	} payload;
 } MQTTAsync_willOptions;
@@ -925,6 +1071,7 @@ typedef struct
 #define MQTT_SSL_VERSION_TLS_1_2 3
 
 /**
+* \~english
 * MQTTAsync_sslProperties defines the settings to establish an SSL/TLS connection using the
 * OpenSSL library. It covers the following scenarios:
 * - Server authentication: The client needs the digital certificate of the server. It is included
@@ -935,6 +1082,13 @@ typedef struct
 * - Anonymous connection: Both client and server do not get authenticated and no credentials are needed
 *   to establish an SSL connection. Note that this scenario is not fully secure since it is subject to
 *   man-in-the-middle attacks.
+* \~japanese
+*  MQTTAsync_sslProperties は、OpenSSL を利用した SSL/TLS 接続のための設定です。以下のパターンを設定することができます。
+* - サーバー認証：クライアントは、サーバー証明書を必要とします。サーバー証明書はいわゆる「トラストストア」に格納されます。
+* - クライアント認証：クライアントとサーバーの両方が SSL ハンドシェイク時に認証されます。トラストストアに格納されたサーバー証明書に加え、クライアントは自身の証明書と
+* いわゆる「キーストア」に保存された、自身の証明書のサインに利用される秘密鍵を必要とします。
+* - 無認証：クライアントとサーバーのどちらも認証を得ず、SSL 接続をするときに何の証明書も使いません。この利用法は、中間者攻撃を防ぐことができないため、完全に安全であるとは言えません。
+* \~
 */
 typedef struct
 {
@@ -959,12 +1113,19 @@ typedef struct
 	const char* privateKeyPassword;
 
 	/**
+	 * \~english
 	* The list of cipher suites that the client will present to the server during the SSL handshake. For a
 	* full explanation of the cipher list format, please see the OpenSSL on-line documentation:
 	* http://www.openssl.org/docs/apps/ciphers.html#CIPHER_LIST_FORMAT
 	* If this setting is ommitted, its default value will be "ALL", that is, all the cipher suites -excluding
 	* those offering no encryption- will be considered.
 	* This setting can be used to set an SSL anonymous connection ("aNULL" string value, for instance).
+  * \~japanese
+  * クライアントが、SSL ハンドシェイクのときにサーバーに提示する暗号化スイートのリスト。リストの形式についての詳細は、以下の URL を見てね。
+	* http://www.openssl.org/docs/apps/ciphers.html#CIPHER_LIST_FORMAT
+  * 無設定のとき、デフォルトは「全て（ALL）」です。つまり暗号化処理をしないものを除く全ての暗号化スイートが利用されることになります。
+  * SSL 無認証接続のときには、例えば "aNULL" を指定することができます。
+  * \~
 	*/
 	const char* enabledCipherSuites;
 
@@ -978,9 +1139,14 @@ typedef struct
     int sslVersion;
 
     /**
+     * \english
      * Whether to carry out post-connect checks, including that a certificate
      * matches the given host name.
      * Exists only if struct_version >= 2
+     * \japanese
+     * 接続後チェックを行うかどうかを指定します、接続後チェックには、証明書とホスト名が合致するかどうかの確認が含まれます。
+     * struct_version >=2 以上のとき有効です。
+     * \~
      */
     int verify;
 
@@ -1028,14 +1194,21 @@ typedef struct
 #define MQTTAsync_SSLOptions_initializer { {'M', 'Q', 'T', 'S'}, 4, NULL, NULL, NULL, NULL, NULL, 1, MQTT_SSL_VERSION_DEFAULT, 0, NULL, NULL, NULL, NULL, NULL, 0}
 
 /**
+ * \~english 
  * MQTTAsync_connectOptions defines several settings that control the way the
  * client connects to an MQTT server.  Default values are set in
  * MQTTAsync_connectOptions_initializer.
+ * \japanese
+ * MQTTAsync_connectOptions は、クライアントが MQTT サーバーに接続する方法に関する設定です。
+ * デフォルト値は、以下に示す MQTTAsync_connectOptions_initializer マクロです。
+ * #define MQTTAsync_connectOptions_initializer { {'M', 'Q', 'T', 'C'}, 6, 60, 1, 65535, NULL, NULL, NULL, 30, 0,\
+ * NULL, NULL, NULL, NULL, 0, NULL, MQTTVERSION_DEFAULT, 0, 1, 60, {0, NULL}, 0, NULL, NULL, NULL, NULL}
+ * \~
  */
 typedef struct
 {
 	/** The eyecatcher for this structure.  must be MQTC. */
-	char struct_id[4];
+	char struct_id[4]; // default: {'M', 'Q', 'T', 'C'},
 	/** The version number of this structure.  Must be 0, 1, 2, 3 4 5 or 6.
 	  * 0 signifies no SSL options and no serverURIs
 	  * 1 signifies no serverURIs
@@ -1044,8 +1217,10 @@ typedef struct
     * 4 signifies no binary password option (just string)
     * 5 signifies no MQTTV5 properties
 	  */
-	int struct_version;
-	/** The "keep alive" interval, measured in seconds, defines the maximum time
+	int struct_version; // default: 6
+	/**
+	 * \~english
+	 * The "keep alive" interval, measured in seconds, defines the maximum time
       * that should pass without communication between the client and the server
       * The client will ensure that at least one message travels across the
       * network within each keep alive period.  In the absence of a data-related
@@ -1054,10 +1229,20 @@ typedef struct
       * interval enables the client to detect when the server is no longer
 	  * available without having to wait for the long TCP/IP timeout.
 	  * Set to 0 if you do not want any keep alive processing.
+    * \~japanese
+    * キープアライブ間隔（秒単位）は、クライアントとサーバーの間で無通信のまま経過する最大時間です。
+    * クライアントは、キープアライブ間隔中、少なくとも１メッセージをやり取りします。キープアライブ間隔中に、実際のデータを持った
+    * メッセージがやり取りされなかった場合、クライアントは極めて小さい MQTT の "ping" メッセージをサーバーに送信し、サーバーは
+    * それを確認します。キープアライブ機能を使うことで、クライアントは、TCP/IP タイムアウトを待つことなく、サーバーが死んでいるか
+    * どうかを検出することができるのです。
+    * キープアライブ機能を利用しない場合には 0 を指定してください。
+    * \~
 	  */
-	int keepAliveInterval;
+	int keepAliveInterval; // default: 60
 	/**
-      * This is a boolean value. The cleansession setting controls the behaviour
+	 * \~english 
+	 * 
+	  * This is a boolean value. The cleansession setting controls the behaviour
       * of both the client and the server at connection and disconnection time.
       * The client and server both maintain session state information. This
       * information is used to ensure "at least once" and "exactly once"
@@ -1076,128 +1261,174 @@ typedef struct
       * information at the client and server is cleared. If cleansession=false,
       * the previous session is resumed. If no previous session exists, a new
       * session is started.
+      * 
+      * \~japanese
+      * ブール値です。cleansession 設定は、クライアントとサーバー両方の、接続時と切断時の挙動を制御するものです。
+      * クライアントとサーバーの両方が、セッション状態を保存します。セッション状態は、「少なくとも１回」と「正確に１回」の送信と、「正確に１回」の受信を確約するために使われます。
+      * セッション情報は、MQTT クライアントによってつく割れたサブスクリプションも保持します。複数セッション間で、これらを保持するか捨てるかの設定です。
+      * 
+      * cleansession が true のとき、ステート状態は接続時、または切断時に捨てられます。false の場合、保持されます。MQTTAsync_connect() を使ってクライアントがサーバーに接続
+      * したとき、クライアントは、クライアント識別子とサーバーアドレスを使って接続を識別します。サーバーは、そのクライアントのセッション状態が、前回の接続時に保存されているかどうかを確認します。
+      * もし前回のセッション状態がまだ残っていて cealsession=true だったときは、前回のセッションの情報はクリアされます。false だったときは、引き継がれます。前のセッションが無いときは新しいものが作られます。
+      * \~
 	  */
-	int cleansession;
+	int cleansession; // default: 1 (MQTT v5 のとき default: 0)
 	/**
       * This controls how many messages can be in-flight simultaneously.
 	  */
-	int maxInflight;
+	int maxInflight; // default: 65535
 	/**
       * This is a pointer to an MQTTAsync_willOptions structure. If your
       * application does not make use of the Last Will and Testament feature,
       * set this pointer to NULL.
       */
-	MQTTAsync_willOptions* will;
+	MQTTAsync_willOptions* will; // default: NULL
 	/**
       * MQTT servers that support the MQTT v3.1 protocol provide authentication
       * and authorisation by user name and password. This is the user name
       * parameter.
       */
-	const char* username;
+	const char* username; // default: NULL
 	/**
       * MQTT servers that support the MQTT v3.1 protocol provide authentication
       * and authorisation by user name and password. This is the password
       * parameter.
       */
-	const char* password;
+	const char* password; // default: NULL
 	/**
       * The time interval in seconds to allow a connect to complete.
       */
-	int connectTimeout;
+	int connectTimeout; // default: 30
 	/**
+   * ~\english
 	 * The time interval in seconds after which unacknowledged publish requests are
 	 * retried during a TCP session.  With MQTT 3.1.1 and later, retries are
 	 * not required except on reconnect.  0 turns off in-session retries, and is the
 	 * recommended setting.  Adding retries to an already overloaded network only
 	 * exacerbates the problem.
+   * \~japanese
+   * TCP セッションで、確認されなかった（unacknowledged）パブリッシュリクエストがリトライされる間隔（秒単位）
+   * MQTT 3.1.1 以降では、reconnect を除いて再試行は不要です。0 は、セッション中の再試行を無効にし、推奨設定となります。
+   * 過負荷状態にあるネットワークに対して、さらに再試行を追加するのは問題を悪化させるだけで、良いことはありません。
+   * \~
 	 */
-	int retryInterval;
+	int retryInterval; // default: 0
 	/**
       * This is a pointer to an MQTTAsync_SSLOptions structure. If your
       * application does not make use of SSL, set this pointer to NULL.
       */
-	MQTTAsync_SSLOptions* ssl;
+	MQTTAsync_SSLOptions* ssl; // default: NULL
 	/**
-      * A pointer to a callback function to be called if the connect successfully
-      * completes.  Can be set to NULL, in which case no indication of successful
-      * completion will be received.
-      */
-	MQTTAsync_onSuccess* onSuccess;
+	 * \~english
+	 * A pointer to a callback function to be called if the connect successfully
+   * completes.  Can be set to NULL, in which case no indication of successful
+   * completion will be received.
+   * \~japanese
+   * 接続が成功したときに呼ばれるコールバック関数へのポインタ。NULL を指定した場合、成功したことを知ることはできません。
+   * \~
+   */
+	MQTTAsync_onSuccess* onSuccess; // default:NULL
 	/**
-      * A pointer to a callback function to be called if the connect fails.
-      * Can be set to NULL, in which case no indication of unsuccessful
-      * completion will be received.
-      */
-	MQTTAsync_onFailure* onFailure;
+   * \~english
+   * A pointer to a callback function to be called if the connect fails.
+   * Can be set to NULL, in which case no indication of unsuccessful
+   * completion will be received.
+   * \~japanese
+   * 接続に失敗したときに呼ばれるコールバック関数へのポインタ。NULL を指定した場合、失敗したことを知ることはできません。
+   */
+	MQTTAsync_onFailure* onFailure; // default:NULL
 	/**
-	  * A pointer to any application-specific context. The
-      * the <i>context</i> pointer is passed to success or failure callback functions to
-      * provide access to the context information in the callback.
-      */
-	void* context;
+	 * \~english
+	 * pointer to any application-specific context. The
+   * the <i>context</i> pointer is passed to success or failure callback functions to
+   * provide access to the context information in the callback.
+   * \~japanese
+   * アプリケーション依存のユーザー定義コンテキストへのポインタ。このポインタは、接続に成功した、失敗した場合のそれぞれのコールバック関数に渡され、コールバック関数の中で利用することができます。
+   * \~
+   */
+	void* context; // default:NULL
+
 	/**
 	  * The number of entries in the serverURIs array.
 	  */
-	int serverURIcount;
+	int serverURIcount; // default:0
 	/**
-	  * An array of null-terminated strings specifying the servers to
-      * which the client will connect. Each string takes the form <i>protocol://host:port</i>.
-      * <i>protocol</i> must be <i>tcp</i> or <i>ssl</i>. For <i>host</i>, you can
-      * specify either an IP address or a domain name. For instance, to connect to
-      * a server running on the local machines with the default MQTT port, specify
-      * <i>tcp://localhost:1883</i>.
-      */
-	char* const* serverURIs;
+	 * \~english
+   * An array of null-terminated strings specifying the servers to
+   * which the client will connect. Each string takes the form <i>protocol://host:port</i>.
+   * <i>protocol</i> must be <i>tcp</i> or <i>ssl</i>. For <i>host</i>, you can
+   * specify either an IP address or a domain name. For instance, to connect to
+   * a server running on the local machines with the default MQTT port, specify
+   * <i>tcp://localhost:1883</i>.
+   * \~japanese
+   * クライアントが接続する１つまたは複数のサーバーを指定するためのNULL 終端された文字列、それぞれの文字列は、 <i>protocol://host:port</i> という形式を取り、プロトコルは
+   * tcp もしくは ssl でなければなりません。ホストには、IP アドレスもしくはドメイン名を指定することができます。例えば、ローカルホストで動作するデフォルトの MQTT サーバーに接続
+   * するときには、<i>tcp://localhost:1883</i> と指定します。
+   * \~
+   */
+	char* const* serverURIs; // default:NULL
 	/**
       * Sets the version of MQTT to be used on the connect.
       * MQTTVERSION_DEFAULT (0) = default: start with 3.1.1, and if that fails, fall back to 3.1
       * MQTTVERSION_3_1 (3) = only try version 3.1
       * MQTTVERSION_3_1_1 (4) = only try version 3.1.1
 	  */
-	int MQTTVersion;
+	int MQTTVersion; // default: MQTTVERSION_DEFAULT
 	/**
-	  * Reconnect automatically in the case of a connection being lost?
-	  */
-	int automaticReconnect;
+	 * \~english 
+	 * Reconnect automatically in the case of a connection being lost?
+   * \~japanese
+   * コネクションが失われたときに自動的に再接続するかどうか？
+   * \~
+	 */
+	int automaticReconnect; // default: 0
 	/**
-	  * Minimum retry interval in seconds.  Doubled on each failed retry.
-	  */
-	int minRetryInterval;
+	 * \~english
+	 * Minimum retry interval in seconds.  Doubled on each failed retry.
+   * \~japanese
+   * 再試行間隔、失敗するごとに倍になります。
+   * \~ 
+	 */
+	int minRetryInterval; // default: 1
 	/**
-	  * Maximum retry interval in seconds.  The doubling stops here on failed retries.
-	  */
-	int maxRetryInterval;
+	 * \~english
+	 * Maximum retry interval in seconds.  The doubling stops here on failed retries.
+   * \~japanese
+   * 再試行間隔の最大値、失敗するごとに再試行間隔が倍々になっていきますが、この指定値で止まります。
+   * \~
+	 */
+	int maxRetryInterval; // default: 60
 	/**
 	 * Optional binary password.  Only checked and used if the password option is NULL
 	 */
 	struct {
 		int len;            /**< binary password length */
 		const void* data;  /**< binary password data */
-	} binarypwd;
+	} binarypwd; // default: {0,NULL}
 	/*
 	 * MQTT V5 clean start flag.  Only clears state at the beginning of the session.
 	 */
-	int cleanstart;
+	int cleanstart; // default: 0 (MQTT v5 のとき default: 1)
 	/**
 	 * MQTT V5 properties for connect
 	 */
-	MQTTProperties *connectProperties;
+	MQTTProperties *connectProperties; // default:NULL
 	/**
 	 * MQTT V5 properties for the will message in the connect
 	 */
-	MQTTProperties *willProperties;
+	MQTTProperties *willProperties; // default:NULL
 	/**
       * A pointer to a callback function to be called if the connect successfully
       * completes.  Can be set to NULL, in which case no indication of successful
       * completion will be received.
       */
-	MQTTAsync_onSuccess5* onSuccess5;
+	MQTTAsync_onSuccess5* onSuccess5;// default:NULL
 	/**
       * A pointer to a callback function to be called if the connect fails.
       * Can be set to NULL, in which case no indication of unsuccessful
       * completion will be received.
       */
-	MQTTAsync_onFailure5* onFailure5;
+	MQTTAsync_onFailure5* onFailure5; // default:NULL
 } MQTTAsync_connectOptions;
 
 
@@ -1209,25 +1440,43 @@ NULL, NULL, NULL, NULL, 0, NULL, MQTTVERSION_5, 0, 1, 60, {0, NULL}, 1, NULL, NU
 
 
 /**
-  * This function attempts to connect a previously-created client (see
-  * MQTTAsync_create()) to an MQTT server using the specified options. If you
-  * want to enable asynchronous message and status notifications, you must call
-  * MQTTAsync_setCallbacks() prior to MQTTAsync_connect().
-  * @param handle A valid client handle from a successful call to
-  * MQTTAsync_create().
-  * @param options A pointer to a valid MQTTAsync_connectOptions
-  * structure.
-  * @return ::MQTTASYNC_SUCCESS if the client connect request was accepted.
-  * If the client was unable to connect to the server, an error code is
-  * returned via the onFailure callback, if set.
-  * Error codes greater than 0 are returned by the MQTT protocol:<br><br>
-  * <b>1</b>: Connection refused: Unacceptable protocol version<br>
-  * <b>2</b>: Connection refused: Identifier rejected<br>
-  * <b>3</b>: Connection refused: Server unavailable<br>
-  * <b>4</b>: Connection refused: Bad user name or password<br>
-  * <b>5</b>: Connection refused: Not authorized<br>
-  * <b>6-255</b>: Reserved for future use<br>
-  */
+ * \~english
+ * This function attempts to connect a previously-created client (see
+ * MQTTAsync_create()) to an MQTT server using the specified options. If you
+ * want to enable asynchronous message and status notifications, you must call
+ * MQTTAsync_setCallbacks() prior to MQTTAsync_connect().
+ * @param handle A valid client handle from a successful call to
+ * MQTTAsync_create().
+ * @param options A pointer to a valid MQTTAsync_connectOptions
+ * structure.
+ * @return ::MQTTASYNC_SUCCESS if the client connect request was accepted.
+ * If the client was unable to connect to the server, an error code is
+ * returned via the onFailure callback, if set.
+ * Error codes greater than 0 are returned by the MQTT protocol:<br><br>
+ * <b>1</b>: Connection refused: Unacceptable protocol version<br>
+ * <b>2</b>: Connection refused: Identifier rejected<br>
+ * <b>3</b>: Connection refused: Server unavailable<br>
+ * <b>4</b>: Connection refused: Bad user name or password<br>
+ * <b>5</b>: Connection refused: Not authorized<br>
+ * <b>6-255</b>: Reserved for future use<br>
+ * \~japanese
+ * この関数は、MQTTAsync_create() を使って作られたクライアントを、指定されたオプションで MQTT サーバーに非同期で接続します。
+ * メッセージと状態を非同期で取り扱いたいときには、この関数を呼ぶ前に、MQTTAsync_setCallbacks() を呼んでおかなければなりません。
+ * @param handle MQTTAsync_create() で作られた有効なクライアントハンドル
+ * @param options 有効な MQTTAsync_connectOptions 構造体へのポインタ
+ * @return クライアントがサーバーへ接続する要求が正しく受け付けられたとき  MQTTASYNC_SUCCESS が返されます。
+ * 筆者注：構造体の形式ミスなどで、受け付けられなかったら、負の値が返されます。このヘッダーの上の方に define されてます。
+ * 
+ * クライアントがサーバーに接続できなかったとき、エラーコードが onFailure コールバックで返されます。
+ * 0 以上が返されたらそれは MQTT プロトコルに規定されたエラーで、以下の意味を持ちます。
+ * <b>1</b>: Connection refused: Unacceptable protocol version<br>
+ * <b>2</b>: Connection refused: Identifier rejected<br>
+ * <b>3</b>: Connection refused: Server unavailable<br>
+ * <b>4</b>: Connection refused: Bad user name or password<br>
+ * <b>5</b>: Connection refused: Not authorized<br>
+ * <b>6-255</b>: Reserved for future use<br>
+ * \~
+ */
 DLLExport int MQTTAsync_connect(MQTTAsync handle, const MQTTAsync_connectOptions* options);
 
 
@@ -1238,20 +1487,32 @@ typedef struct
 	/** The version number of this structure.  Must be 0 or 1.  0 signifies no V5 properties */
 	int struct_version;
 	/**
-      * The client delays disconnection for up to this time (in
-      * milliseconds) in order to allow in-flight message transfers to complete.
-      */
+   * \~english
+   * The client delays disconnection for up to this time (in
+   * milliseconds) in order to allow in-flight message transfers to complete.
+   * \~japanese
+   * 転送中のメッセージを送信完了させるために切断を遅らせる秒数（ミリ秒単位）、デフォルト 0
+   * \~
+   */
 	int timeout;
 	/**
+   * \~english
     * A pointer to a callback function to be called if the disconnect successfully
     * completes.  Can be set to NULL, in which case no indication of successful
     * completion will be received.
+    * ~\japanese
+    * 切断が成功したときに呼ばれるコールバック関数。NULL を指定した場合、切断が成功したことを知ることはできません。
+    * \~
     */
 	MQTTAsync_onSuccess* onSuccess;
 	/**
-    * A pointer to a callback function to be called if the disconnect fails.
+	 * \~english
+	 * A pointer to a callback function to be called if the disconnect fails.
     * Can be set to NULL, in which case no indication of unsuccessful
     * completion will be received.
+    * \~japanese
+    * 切断が失敗したときに呼ばれるコールバック関数。NULL を指定した場合、切断が失敗したことを知ることはできません。
+    * \~
     */
 	MQTTAsync_onFailure* onFailure;
 	/**
@@ -1289,6 +1550,7 @@ typedef struct
 	MQTTProperties_initializer, MQTTREASONCODE_SUCCESS, NULL, NULL }
 
 /**
+ * \~english
   * This function attempts to disconnect the client from the MQTT
   * server. In order to allow the client time to complete handling of messages
   * that are in-flight when this function is called, a timeout period is
@@ -1305,21 +1567,35 @@ typedef struct
   * @return ::MQTTASYNC_SUCCESS if the client successfully disconnects from
   * the server. An error code is returned if the client was unable to disconnect
   * from the server
+  * \~japanese
+  * この関数は、クライアントをMQTT サーバーから非同期で切断します。この関数が呼ばれたときに転送中のメッセージをクライアントが処理完了するために、タイムアウト時間（切断の遅延）を指定することができます。
+  * タイムアウト時間が経過した時点で、クライアントは、処理中のメッセージがあったとしてもサーバーへの接続を切断します。
+  * 次に同じサーバーにクライアントが接続したとき、送信完了できていなかった QoS1 もしくは 2 のメッセージは、一つ前と今回の両方の cleansession の設定次第で、再送される場合と再送されない場合があります。
+  * @param handle クライアントハンドラ
+  * @param options 切断オプション設定の構造体
+  * @return 正常に切断が受け付けされたときには、MQTTASYNC_SUCCESS を返します。オプションの形式ミスなどで受け付けできなかったときにはエラーコードが返されます（このヘッダーの上の方に #define されてるやつです）
+  * \~
   */
 DLLExport int MQTTAsync_disconnect(MQTTAsync handle, const MQTTAsync_disconnectOptions* options);
 
 
 /**
-  * This function allows the client application to test whether or not a
-  * client is currently connected to the MQTT server.
-  * @param handle A valid client handle from a successful call to
-  * MQTTAsync_create().
-  * @return Boolean true if the client is connected, otherwise false.
-  */
+ * \~english
+ * This function allows the client application to test whether or not a
+ * client is currently connected to the MQTT server.
+ * @param handle A valid client handle from a successful call to
+ * MQTTAsync_create().
+ * @return Boolean true if the client is connected, otherwise false.
+ * \~japanese
+ * この関数は、クライアントがサーバーに現在接続されているかどうかを返します。
+ * @param handle クライアントハンドラ
+ * @return Boolean true if the client is connected, otherwise false.
+ * \~
+ */
 DLLExport int MQTTAsync_isConnected(MQTTAsync handle);
 
-
 /**
+  * \~english 
   * This function attempts to subscribe a client to a single topic, which may
   * contain wildcards (see @ref wildcard). This call also specifies the
   * @ref qos requested for the subscription
@@ -1332,11 +1608,14 @@ DLLExport int MQTTAsync_isConnected(MQTTAsync handle);
   * @return ::MQTTASYNC_SUCCESS if the subscription request is successful.
   * An error code is returned if there was a problem registering the
   * subscription.
+  * \~japanese
+  * クライアントにひとつのトピックを非同期で、指定された QoS でサブスクライブさせます。トピックはワイルドカードを含むことができます（@ref wildcard 見てね）
   */
 DLLExport int MQTTAsync_subscribe(MQTTAsync handle, const char* topic, int qos, MQTTAsync_responseOptions* response);
 
 
 /**
+  * \~english 
   * This function attempts to subscribe a client to a list of topics, which may
   * contain wildcards (see @ref wildcard). This call also specifies the
   * @ref qos requested for each topic (see also MQTTAsync_subscribe()).
@@ -1352,6 +1631,9 @@ DLLExport int MQTTAsync_subscribe(MQTTAsync handle, const char* topic, int qos, 
   * @return ::MQTTASYNC_SUCCESS if the subscription request is successful.
   * An error code is returned if there was a problem registering the
   * subscriptions.
+  * \~japanese
+  * クライアントに、リストで指定した複数のトピックを非同期で、指定された QoS でサブスクライブさせます。トピックにはワイルドカードを含むことができます。
+  * \~
   */
 DLLExport int MQTTAsync_subscribeMany(MQTTAsync handle, int count, char* const* topic, int* qos, MQTTAsync_responseOptions* response);
 
@@ -1385,7 +1667,8 @@ DLLExport int MQTTAsync_unsubscribeMany(MQTTAsync handle, int count, char* const
 
 
 /**
-  * This function attempts to publish a message to a given topic (see also
+ *  \~english
+ *  This function attempts to publish a message to a given topic (see also
   * ::MQTTAsync_sendMessage()). An ::MQTTAsync_token is issued when
   * this function returns successfully. If the client application needs to
   * test for successful delivery of messages, a callback should be set
@@ -1401,6 +1684,18 @@ DLLExport int MQTTAsync_unsubscribeMany(MQTTAsync handle, int count, char* const
   * This is optional and can be set to NULL.
   * @return ::MQTTASYNC_SUCCESS if the message is accepted for publication.
   * An error code is returned if there was a problem accepting the message.
+  * \~japanese
+  * この関数は、指定されたトピックにメッセージをパブリッシュします（::MQTTAsync_sendMessage()も見てね）。この関数が成功すると、::MQTTAsync_token が発行されます。
+  * コールバック関数（::MQTTAsync_onSuccess() と ::MQTTAsync_deliveryComplete()）を指定することで、クライアントアプリケーションが、メッセージが正しくサーバーに転送されたことを確認することができます。
+  * @param handle 有効なクライアントハンドル（MQTTAsync_create()で作られたもの）
+  * @param destinationName トピック名
+  * @param payloadlen ペイロードの長さ（バイト単位）
+  * @param payload メッセージのペイロードを格納したバイト列へのポインタ
+  * @param qos QoS
+  * @param retained retained フラグ
+  * @param response MQTTAsync_responseOptions 構造体へのポインタ。コールバック関数にセットするために使う。オプションなので、NULL にしても良い。
+  * @return ::MQTTASYNC_SUCCESS メッセージがパブリッシュ用に受け付けられたときに返される。受け付けに失敗したときにはエラーコードが返されます。
+  * \~
   */
 DLLExport int MQTTAsync_send(MQTTAsync handle, const char* destinationName, int payloadlen, const void* payload, int qos,
 		int retained, MQTTAsync_responseOptions* response);
